@@ -3,6 +3,8 @@ import '../screens/dashboard.dart';
 import '../screens/homePage.dart';
 import '../screens/profile.dart';
 import '../screens/notifications.dart';
+import 'package:provider/provider.dart';
+import '../model/profile/profileProvider.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
   CustomBottomNavigationState createState() => CustomBottomNavigationState();
@@ -10,10 +12,23 @@ class CustomBottomNavigation extends StatefulWidget {
 
 class CustomBottomNavigationState extends State<CustomBottomNavigation> {
   int index = 0;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<ProfileProvider>(context, listen: false).getProfile().then((_) {
+      setState(() {
+        isLoading = false;
+      });
+    });
+    super.initState();
+  }
+
   final screens = [
     HomePage(),
     Dashboard(),
-    NotificationScreen(),
+    Notifications(),
     Profile(),
   ];
 
@@ -21,15 +36,19 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final tabLayout = width > 600;
-    final largeLayout = width > 350 && width < 600;
 
     // TODO: implement build
     return Scaffold(
-        body: screens[index],
+        body: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.green,
+                ),
+              )
+            : screens[index],
         extendBody: true,
         bottomNavigationBar: Container(
-          height: !tabLayout && !largeLayout ? height * 0.08 : height * 0.06,
+          height: height * 0.06,
           width: double.infinity,
           margin: EdgeInsets.only(bottom: height * 0.02),
           // color: Colors.red,
@@ -43,9 +62,7 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
               Center(
                 child: Container(
                   width: width * 0.75,
-                  height: !tabLayout && !largeLayout
-                      ? height * 0.058
-                      : height * 0.05,
+                  height: height * 0.05,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -85,8 +102,7 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
                               // });
 
                               child: Image.asset(
-                                  'assets/images/Icon awesome-shopping-cart.png',
-                                  height: !tabLayout && !largeLayout ? 20 : 24),
+                                  'assets/images/Icon awesome-shopping-cart.png'),
                             ),
                             SizedBox(width: width * 0.1),
                             InkWell(
@@ -107,8 +123,7 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
                               //   // });
                               // },
                               child: Image.asset(
-                                  'assets/images/Icon ionic-ios-settings.png',
-                                  height: !tabLayout && !largeLayout ? 20 : 24),
+                                  'assets/images/Icon ionic-ios-settings.png'),
                             )
                           ],
                         ),
@@ -140,9 +155,7 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
                                 //   // });
                                 // },
                                 child: Image.asset(
-                                    'assets/images/Icon awesome-bell.png',
-                                    height:
-                                        !tabLayout && !largeLayout ? 20 : 24),
+                                    'assets/images/Icon awesome-bell.png'),
                               ),
                             ),
                             SizedBox(width: width * 0.1),
@@ -165,10 +178,7 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
                                 },
                                 child: ClipRRect(
                                     child: Image.asset(
-                                        'assets/images/z0mztjh7.png',
-                                        height: !tabLayout && !largeLayout
-                                            ? 20
-                                            : 24)))
+                                        'assets/images/z0mztjh7.png')))
                           ],
                         ),
                       )

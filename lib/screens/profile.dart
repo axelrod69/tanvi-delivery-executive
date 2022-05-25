@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../model/profile/profileProvider.dart';
 // import 'package:tanvi/widgets/bottomNavigation.dart';
 
 class Profile extends StatefulWidget {
@@ -12,6 +14,7 @@ class ProfileState extends State<Profile> {
     final width = MediaQuery.of(context).size.width;
     final tabLayout = width > 600;
     final largeLayout = width > 350 && width < 600;
+    final provider = Provider.of<ProfileProvider>(context).profile;
     // final textScaleFactor = MediaQuery.of(context).textScaleFactor * 1.2;
 
     // TODO: implement build
@@ -105,7 +108,7 @@ class ProfileState extends State<Profile> {
                         child: Column(
                           children: [
                             Text(
-                              'Eli Avon',
+                              '${provider['data']['first_name']} ${provider['data']['last_name']}',
                               // textScaleFactor: textScaleFactor,
                               style: TextStyle(
                                   color: Colors.black,
@@ -114,7 +117,7 @@ class ProfileState extends State<Profile> {
                                       !tabLayout && !largeLayout ? 25 : 35),
                             ),
                             Text(
-                              'something@somewhere.com',
+                              '${provider['data']['email']}',
                               // textScaleFactor: textScaleFactor,
                               style: TextStyle(color: Colors.grey[600]),
                             ),

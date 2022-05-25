@@ -4,18 +4,18 @@ import '../model/network/authentication.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FormWidget extends StatefulWidget {
-  FormWidgetState createState() => FormWidgetState();
+class ChangePassword extends StatefulWidget {
+  ChangePasswordState createState() => ChangePasswordState();
 }
 
-class FormWidgetState extends State<FormWidget> {
+class ChangePasswordState extends State<ChangePassword> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   final _focusFirst = FocusNode();
   final _focusSecond = FocusNode();
   final _focusThird = FocusNode();
   final _focusFourth = FocusNode();
-  String? email;
-  String? password;
+  String? oldPassword;
+  String? newPassword;
 
   @override
   void dispose() {
@@ -58,7 +58,7 @@ class FormWidgetState extends State<FormWidget> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                    hintText: 'Enter Your Email',
+                    hintText: 'Old Password',
                     suffixIcon: Icon(Icons.send, color: Colors.green),
                     // label: Text(
                     //   'Enter Your Phone Number',
@@ -69,9 +69,9 @@ class FormWidgetState extends State<FormWidget> {
                     enabledBorder: InputBorder.none),
                 validator: (execEmail) {
                   if (execEmail!.isEmpty) {
-                    return 'Please Enter Email';
+                    return 'Please Enter Old Password';
                   } else {
-                    email = execEmail;
+                    oldPassword = execEmail;
                     return null;
                   }
                 },
@@ -98,7 +98,7 @@ class FormWidgetState extends State<FormWidget> {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                    hintText: 'Enter Your Password',
+                    hintText: 'New Password',
                     suffixIcon: Icon(Icons.check_circle, color: Colors.green),
                     // label: Text(
                     //   'Enter Your Phone Number',
@@ -109,9 +109,9 @@ class FormWidgetState extends State<FormWidget> {
                     enabledBorder: InputBorder.none),
                 validator: (execPassword) {
                   if (execPassword!.isEmpty) {
-                    return 'Please Enter Password';
+                    return 'Please Enter New Password';
                   } else {
-                    password = execPassword;
+                    newPassword = execPassword;
                     return null;
                   }
                 },
@@ -135,7 +135,7 @@ class FormWidgetState extends State<FormWidget> {
             child: InkWell(
               onTap: () {
                 if (_globalKey.currentState!.validate()) {
-                  signIn(context, email!, password!);
+                  changePassword(context, oldPassword!, newPassword!);
                 }
               },
               child: Container(
@@ -163,9 +163,10 @@ class FormWidgetState extends State<FormWidget> {
     );
   }
 
-  void signIn(BuildContext context, String email, String password) async {
+  void changePassword(
+      BuildContext context, String email, String password) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var data = {'email': email, 'password': password};
+    var data = {'old_password': email, 'new_password': password};
 
     var response = await Provider.of<Network>(context, listen: false)
         .logIn(data, 'api/delivery-executive/login/');
