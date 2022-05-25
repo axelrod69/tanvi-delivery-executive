@@ -15,6 +15,7 @@ import './model/network/authentication.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './screens/changePassword.dart';
 import './model/profile/profileProvider.dart';
+import './model/location/locationProvider.dart';
 
 void main() => runApp(TanviDeliveryApp());
 
@@ -55,7 +56,8 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Network()),
-        ChangeNotifierProvider(create: (context) => ProfileProvider())
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(create: (context) => LocationProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

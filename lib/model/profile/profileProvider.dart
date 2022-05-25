@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:provider/provider.dart';
 
 class ProfileProvider with ChangeNotifier {
-  String baseUrl = 'http://3.109.206.91:8000/';
+  String baseUrl = 'http://192.168.0.3:3000/';
   Map<String, dynamic> _profile = {};
 
   Map<String, dynamic> get profile {
