@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../screens/dashboard.dart';
 import '../screens/homePage.dart';
@@ -5,6 +6,8 @@ import '../screens/profile.dart';
 import '../screens/notifications.dart';
 import 'package:provider/provider.dart';
 import '../model/profile/profileProvider.dart';
+import '../model/location/locationProvider.dart';
+import '../model/changeLocation/changeLocationProvider.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
   CustomBottomNavigationState createState() => CustomBottomNavigationState();
@@ -24,6 +27,24 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
     });
     super.initState();
   }
+
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
+  //   Timer.periodic(const Duration(seconds: 300), (Timer t) => apiCall());
+  //   super.didChangeDependencies();
+  // }
+
+  // apiCall() async {
+  //   double latitude = Provider.of<LocationProvider>(context, listen: false)
+  //       .coorDinates['lat'];
+  //   double longitude = Provider.of<LocationProvider>(context, listen: false)
+  //       .coorDinates['lng'];
+  //   print('Latitude LAt: $latitude');
+  //   print('Longitude Long: $longitude');
+  //   Provider.of<ChangeLocationProvider>(context, listen: false)
+  //       .postLocation(latitude, longitude, 'active');
+  // }
 
   final screens = [
     HomePage(),

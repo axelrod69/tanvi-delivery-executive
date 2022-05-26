@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileProvider with ChangeNotifier {
+class OrderHistoryProvider with ChangeNotifier {
   String baseUrl = 'http://192.168.0.113:3000/';
-  Map<String, dynamic> _profile = {};
+  Map<String, dynamic> _orderHistory = {};
 
-  Map<String, dynamic> get profile {
-    return {..._profile};
+  Map<String, dynamic> get orderHistory {
+    return {..._orderHistory};
   }
 
-  Future<void> getProfile() async {
+  Future<void> getOrderHistory(String filter) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    final url = Uri.parse(baseUrl + 'api/delivery-executive/profile/basic/');
+    final url =
+        Uri.parse(baseUrl + 'api/delivery-executive/order-list/$filter/');
     final response = await http.get(url, headers: {
       'Authorization': 'Bearer ${localStorage.getString('token')}',
       'Content-Type': 'application/json'
     });
-
     var res = json.decode(response.body);
 
-    _profile = res;
+    _orderHistory = res;
 
-    print('Profile: $_profile');
+    print('$filter Orders: $_orderHistory');
   }
 }

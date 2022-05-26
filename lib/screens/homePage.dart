@@ -1,16 +1,72 @@
+import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../model/location/locationProvider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../model/changeLocation/changeLocationProvider.dart';
 
 class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
+  bool isLoading = true;
+  bool isPressed = false;
+  String? status;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // statusExec();
+    Provider.of<ChangeLocationProvider>(context, listen: false)
+        .getLocationDetails()
+        .then((_) {
+      setState(() {
+        isLoading = false;
+      });
+    });
+    super.initState();
+  }
+
+  apiCall(String execStatus) async {
+    print('Is Pressed: $isPressed');
+    print('execStatus: $execStatus');
+    Random number = Random();
+    Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      if (isPressed == true) {
+        double latitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lat'];
+        // double latitude = number.nextDouble();
+        double longitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lng'];
+        // double longitude = number.nextDouble();
+        print('Latitude LAt: $latitude');
+        print('Longitude Long: $longitude');
+        print('Status Inside: $status');
+        Provider.of<ChangeLocationProvider>(context, listen: false)
+            .postLocation(latitude, longitude, execStatus);
+      } else {
+        double latitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lat'];
+        // double latitude = number.nextDouble();
+        double longitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lng'];
+        Provider.of<ChangeLocationProvider>(context, listen: false)
+            .postLocation(latitude, longitude, execStatus);
+        t.cancel();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = (MediaQuery.of(context).size.height);
     final width = MediaQuery.of(context).size.width;
     final tabLayout = width > 600;
     final largeLayout = width > 350 && width < 600;
+    final provider =
+        Provider.of<ChangeLocationProvider>(context).locationDetails;
 
     // TODO: implement build
     return Scaffold(
@@ -87,26 +143,50 @@ class HomePageState extends State<HomePage> {
             left: width * 0.25,
             top: !tabLayout && !largeLayout ? height * 0.42 : height * 0.4,
             right: width * 0.25,
-            child: Container(
-              width: width * 0.05,
-              height: height * 0.15,
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 10,
-                        offset: Offset(1, 2))
-                  ]),
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Container(
-                  width: width * 0.02,
-                  height: height * 0.15,
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
+            child: InkWell(
+              onTap: () async {
+                SharedPreferences localStorage =
+                    await SharedPreferences.getInstance();
+                setState(() {
+                  isPressed = !isPressed;
+                  status = isPressed == true ? 'active' : 'inactive';
+                  print(isPressed);
+                  print(status);
+                });
+                apiCall(status!);
+              },
+              child: Container(
+                width: width * 0.05,
+                height: height * 0.15,
+                decoration: const BoxDecoration(
+                    color: Colors.white,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 10,
+                          offset: Offset(1, 2))
+                    ]),
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Container(
+                    width: width * 0.02,
+                    height: height * 0.15,
+                    decoration: BoxDecoration(
+                      color: status == 'active'
+                          ? const Color.fromARGB(255, 36, 192, 41)
+                          : Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        isPressed == true ? 'Active' : 'Inactive',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -279,7 +359,7 @@ class HomePageState extends State<HomePage> {
                         right: height * 0.01),
                     child: InkWell(
                       onTap: () =>
-                          Navigator.of(context).pushNamed('/order-details'),
+                          Navigator.of(context).pushNamed('/delivered-orders'),
                       child: Container(
                         width: double.infinity,
                         height: height * 0.1,
@@ -300,7 +380,7 @@ class HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: height * 0.005),
                   Text(
-                    'Order\n Details',
+                    'Delivered\n Orders',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,

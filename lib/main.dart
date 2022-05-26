@@ -16,6 +16,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './screens/changePassword.dart';
 import './model/profile/profileProvider.dart';
 import './model/location/locationProvider.dart';
+import './model/changeLocation/changeLocationProvider.dart';
+import './model/ordersHistory/orderHistory.dart';
+import './screens/deliveredOrders.dart';
 
 void main() => runApp(TanviDeliveryApp());
 
@@ -29,7 +32,6 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
   @override
   void initState() {
     // TODO: implement initState
-
     _checkIfLoggedIn();
     super.initState();
   }
@@ -57,7 +59,9 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => Network()),
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
-        ChangeNotifierProvider(create: (context) => LocationProvider())
+        ChangeNotifierProvider(create: (context) => LocationProvider()),
+        ChangeNotifierProvider(create: (context) => ChangeLocationProvider()),
+        ChangeNotifierProvider(create: (context) => OrderHistoryProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -67,7 +71,7 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
         // home: SignIn(),
         routes: {
           '/home-screen': (context) => CustomBottomNavigation(),
-          '/cancelled-orders': ((context) => CancelledOrders()),
+          '/cancelled-orders': (context) => CancelledOrders(),
           '/order-details': (context) => OrderDetails(),
           '/present-orders': (context) => PresentOrders(),
           '/order-history': (context) => OrderHistory(),
@@ -75,6 +79,7 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
           '/notification-screen': (context) => Notifications(),
           '/edit-details': (context) => EditDetails(),
           '/change-password': (context) => Password(),
+          '/delivered-orders': (context) => DeliveredOrders(),
         },
       ),
     );
