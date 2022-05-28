@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/ordersHistory/orderHistory.dart';
 import 'package:provider/provider.dart';
+import '../screens/orderDetails.dart';
 
 class PresentOrders extends StatefulWidget {
   PresentOrdersState createState() => PresentOrdersState();
@@ -255,11 +256,18 @@ class PresentOrdersState extends State<PresentOrders> {
                                   ],
                                 ),
                                 SizedBox(height: height * 0.02),
-                                const Center(
-                                  child: Text(
-                                    'View Details',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                Center(
+                                  child: InkWell(
+                                    onTap: () => Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) => OrderDetails(
+                                                provider['data'][index]['id']
+                                                    .toString()))),
+                                    child: const Text(
+                                      'View Details',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),

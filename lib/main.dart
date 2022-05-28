@@ -69,10 +69,11 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
             scaffoldBackgroundColor: const Color.fromRGBO(236, 236, 248, 1)),
         home: isAuth ? CustomBottomNavigation() : SignIn(),
         // home: SignIn(),
+        // home: OrderDetails(),
         routes: {
           '/home-screen': (context) => CustomBottomNavigation(),
           '/cancelled-orders': (context) => CancelledOrders(),
-          '/order-details': (context) => OrderDetails(),
+          // '/order-details': (context) => OrderDetails(),
           '/present-orders': (context) => PresentOrders(),
           '/order-history': (context) => OrderHistory(),
           '/profile-screen': (context) => Profile(),

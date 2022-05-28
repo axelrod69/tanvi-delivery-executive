@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../screens/storeAddress.dart';
 
 class Address extends StatefulWidget {
+  final List<dynamic> productList;
   AddressState createState() => AddressState();
+
+  Address(this.productList);
 }
 
 class AddressState extends State<Address> {
@@ -38,13 +42,16 @@ class AddressState extends State<Address> {
                       fontSize: 16),
                 ),
                 SizedBox(width: width * 0.12),
-                const Expanded(
-                  child: Text(
-                      '125/1, Ripon Street, Kolkata-700012, West Bengal, India'),
+                Expanded(
+                  child: InkWell(
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              StoreAddress(widget.productList))),
+                      child: Text('View All')),
                 )
               ],
             ),
-            SizedBox(height: height * 0.14),
+            SizedBox(height: height * 0.05),
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,8 +64,7 @@ class AddressState extends State<Address> {
                 ),
                 SizedBox(width: width * 0.072),
                 const Expanded(
-                  child: Text(
-                      '48, Tarun Sengupta Sarani, Dum Dum, PO.Italgacha, Kolkata-700079, West Bengal, India'),
+                  child: Text('View All'),
                 )
               ],
             )
