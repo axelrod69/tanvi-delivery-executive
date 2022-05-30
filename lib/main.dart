@@ -33,6 +33,7 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
   void initState() {
     // TODO: implement initState
     _checkIfLoggedIn();
+
     super.initState();
   }
 

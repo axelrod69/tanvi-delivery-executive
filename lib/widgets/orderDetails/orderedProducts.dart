@@ -8,53 +8,6 @@ class OrderedProducts extends StatefulWidget {
 }
 
 class OrderedProductsState extends State<OrderedProducts> {
-  final List<dynamic> _categoryItems = [
-    {
-      'id': 1,
-      'name': 'Tomatoes',
-      'discountPrice': '30.00/kg',
-      'actualPrice': '₹ 30.25',
-      'decription':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      'quantity': 1,
-      'image': 'assets/images/tomato-15559.png',
-      'weight': '2/KG'
-    },
-    {
-      'id': 2,
-      'name': 'Cabbage',
-      'discountPrice': '30.00/KG',
-      'actualPrice': '₹ 30.25',
-      'decription':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      'quantity': 2,
-      'image': 'assets/images/PngItem_1310699.png',
-      'weight': '2/KG'
-    },
-    {
-      'id': 3,
-      'name': 'Onions',
-      'discountPrice': '30.00/kg',
-      'actualPrice': '₹ 30.25',
-      'decription':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      'quantity': 3,
-      'image': 'assets/images/tomato-15559.png',
-      'weight': '2/KG'
-    },
-    {
-      'id': 4,
-      'name': 'Turnip',
-      'discountPrice': '30.00/kg',
-      'actualPrice': '₹ 30.25',
-      'decription':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      'quantity': 4,
-      'image': 'assets/images/PngItem_1310699.png',
-      'weight': '2/KG'
-    }
-  ];
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -104,7 +57,7 @@ class OrderedProductsState extends State<OrderedProducts> {
                                 offset: Offset(0, 2))
                           ]),
                       child: Image.network(
-                          'http://192.168.0.114:3000${itemIndex['product']['main_image']}'
+                          'http://192.168.0.155:3000${itemIndex['product']['main_image']}'
                           // _categoryItems[index]['image']
                           )),
                 SizedBox(height: height * 0.01),
@@ -114,7 +67,7 @@ class OrderedProductsState extends State<OrderedProducts> {
                     ['vendor_products'])
                   Expanded(
                     child: Text(
-                      '${itemIndex['product']['name']} x${widget.productList[index]['total_quantity']}',
+                      '${itemIndex['product']['name']} x${itemIndex['quantity']}',
                       // textScaleFactor: textScaleFactor,
                       style: TextStyle(
                           color: Colors.black,

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../screens/storeAddress.dart';
+import '../../screens/customerDetails.dart';
 
 class Address extends StatefulWidget {
+  final Map<String, dynamic> customerAddress;
   final List<dynamic> productList;
   AddressState createState() => AddressState();
 
-  Address(this.productList);
+  Address(this.customerAddress, this.productList);
 }
 
 class AddressState extends State<Address> {
@@ -63,8 +65,12 @@ class AddressState extends State<Address> {
                       fontSize: 16),
                 ),
                 SizedBox(width: width * 0.072),
-                const Expanded(
-                  child: Text('View All'),
+                Expanded(
+                  child: InkWell(
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              CustomerAddress(widget.customerAddress))),
+                      child: Text('View All')),
                 )
               ],
             )

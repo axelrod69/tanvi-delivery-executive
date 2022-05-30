@@ -60,6 +60,12 @@ class HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final height = (MediaQuery.of(context).size.height);
     final width = MediaQuery.of(context).size.width;
@@ -67,6 +73,8 @@ class HomePageState extends State<HomePage> {
     final largeLayout = width > 350 && width < 600;
     final provider =
         Provider.of<ChangeLocationProvider>(context).locationDetails;
+
+    print('Address ${Provider.of<LocationProvider>(context).address}');
 
     // TODO: implement build
     return Scaffold(

@@ -142,7 +142,8 @@ class OrderDetailsState extends State<OrderDetails> {
                   SizedBox(height: height * 0.02),
                   OrderedProducts(provider['data']['vendorList']),
                   SizedBox(height: height * 0.02),
-                  Address(provider['data']['vendorList']),
+                  Address(provider['data']['orderDetails']['address'],
+                      provider['data']['vendorList']),
                   SizedBox(height: height * 0.02),
                   Padding(
                     padding: EdgeInsets.only(
@@ -177,7 +178,8 @@ class OrderDetailsState extends State<OrderDetails> {
                               Column(
                                 children: [
                                   Text(
-                                    '503',
+                                    provider['data']['orderDetails']
+                                        ['grand_total'],
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
@@ -186,7 +188,7 @@ class OrderDetailsState extends State<OrderDetails> {
                                             : 25),
                                   ),
                                   Text(
-                                    '(paid)',
+                                    '(${provider['data']['orderDetails']['payment_status']})',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.grey,

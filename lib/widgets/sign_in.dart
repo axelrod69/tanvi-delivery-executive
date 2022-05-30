@@ -56,7 +56,7 @@ class FormWidgetState extends State<FormWidget> {
                         offset: Offset(1, 2))
                   ]),
               child: TextFormField(
-                keyboardType: TextInputType.number,
+                // keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                     hintText: 'Enter Your Email',
                     suffixIcon: Icon(Icons.send, color: Colors.green),
@@ -96,7 +96,7 @@ class FormWidgetState extends State<FormWidget> {
                         offset: Offset(1, 2))
                   ]),
               child: TextFormField(
-                keyboardType: TextInputType.number,
+                // keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                     hintText: 'Enter Your Password',
                     suffixIcon: Icon(Icons.check_circle, color: Colors.green),
@@ -135,6 +135,7 @@ class FormWidgetState extends State<FormWidget> {
             child: InkWell(
               onTap: () {
                 if (_globalKey.currentState!.validate()) {
+                  print('Clicked');
                   signIn(context, email!, password!);
                 }
               },

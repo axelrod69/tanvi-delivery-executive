@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../model/map.dart';
 
 class StoreAddress extends StatefulWidget {
   final List<dynamic> productList;
@@ -51,7 +51,7 @@ class StoreAddressState extends State<StoreAddress> {
         ),
       ),
       body: Container(
-        height: double.infinity,
+        height: height * 0.99,
         width: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -81,23 +81,23 @@ class StoreAddressState extends State<StoreAddress> {
                         fit: FlexFit.loose,
                         child: Container(
                           width: double.infinity,
+                          padding: EdgeInsets.only(left: width * 0.04),
                           decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(20)),
-                          child: ListView.builder(
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  for (var item in widget.productList[index]
-                                      ['vendor_products'])
-                                    Text(
-                                        '${item['product']['name']} x${widget.productList[index]['total_quantity']}'),
-                                ],
-                              ),
-                            ),
-                            itemCount: widget
-                                .productList[index]['vendor_products'].length,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Center(
+                                  child: Text('Products To Be Picked',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold))),
+                              for (var itemIndex in widget.productList[index]
+                                  ['vendor_products'])
+                                Text(
+                                    '${itemIndex['product']['name']} x${itemIndex['quantity']}')
+                            ],
                           ),
                         ),
                       ),
@@ -106,27 +106,23 @@ class StoreAddressState extends State<StoreAddress> {
                         fit: FlexFit.loose,
                         child: Container(
                           width: double.infinity,
+                          padding: EdgeInsets.only(left: width * 0.04),
                           decoration: BoxDecoration(
                               color: Colors.amber,
                               borderRadius: BorderRadius.circular(20)),
-                          child: ListView.builder(
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  // for (var item in widget.productList[index]
-                                  //     ['vendor_address'])
-                                  Text(
-                                      'Vendor Name: ${widget.productList[index]['vendor_address']['name']}'),
-                                  // for (var item in widget.productList[index]
-                                  //     ['vendor_address'])
-                                  Expanded(
-                                      child: Text(
-                                          'Address: ${widget.productList[index]['vendor_address']['address']}, ${widget.productList[index]['vendor_address']['locality']}, ${widget.productList[index]['vendor_address']['city']}, ${widget.productList[index]['vendor_address']['state']}, ${widget.productList[index]['vendor_address']['postcode']}'))
-                                ],
-                              ),
-                            ),
-                            itemCount: widget.productList.length,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Center(
+                                  child: Text('Vendor Details',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold))),
+                              Text(
+                                  'Name: ${widget.productList[index]['vendor_address']['name']}'),
+                              Text(
+                                  'Address: ${widget.productList[index]['vendor_address']['address']}, ${widget.productList[index]['vendor_address']['locality']}, ${widget.productList[index]['vendor_address']['city']}, ${widget.productList[index]['vendor_address']['state']}, ${widget.productList[index]['vendor_address']['postcode']},')
+                            ],
                           ),
                         ),
                       ),
@@ -135,9 +131,39 @@ class StoreAddressState extends State<StoreAddress> {
                         fit: FlexFit.tight,
                         child: Container(
                           width: double.infinity,
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(20)),
+                          child: InkWell(
+                            onTap: () => ExternalGoogleMap.openMap(
+                                double.parse(widget.productList[index]
+                                    ['vendor_address']['map_lat']),
+                                double.parse(widget.productList[index]
+                                    ['vendor_address']['map_lng'])),
+                            child: Container(
+                              height: double.infinity,
+                              // width: width * 0.4,
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 8,
+                                        offset: Offset(1, 2))
+                                  ]),
+                              child: const Center(
+                                child: Text(
+                                  'Get Directions',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       )
                     ],
