@@ -38,29 +38,29 @@ class ProfileState extends State<Profile> {
               padding: EdgeInsets.only(left: width * 0.01),
               child: Row(
                 children: [
-                  InkWell(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: Container(
-                      height: !tabLayout && !largeLayout
-                          ? height * 0.08
-                          : height * 0.05,
-                      width: !tabLayout && !largeLayout
-                          ? width * 0.15
-                          : width * 0.1,
-                      padding: EdgeInsets.only(left: width * 0.025),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5,
-                                offset: Offset(0, 2))
-                          ]),
-                      child:
-                          const Icon(Icons.arrow_back_ios, color: Colors.green),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () => Navigator.of(context).pop(),
+                  //   child: Container(
+                  //     height: !tabLayout && !largeLayout
+                  //         ? height * 0.08
+                  //         : height * 0.05,
+                  //     width: !tabLayout && !largeLayout
+                  //         ? width * 0.15
+                  //         : width * 0.1,
+                  //     padding: EdgeInsets.only(left: width * 0.025),
+                  //     decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(10),
+                  //         boxShadow: const [
+                  //           BoxShadow(
+                  //               color: Colors.grey,
+                  //               blurRadius: 5,
+                  //               offset: Offset(0, 2))
+                  //         ]),
+                  //     child:
+                  //         const Icon(Icons.arrow_back_ios, color: Colors.green),
+                  //   ),
+                  // ),
                   Padding(
                     padding: EdgeInsets.only(
                         left: !tabLayout && !largeLayout
@@ -204,14 +204,21 @@ class ProfileState extends State<Profile> {
                                     blurRadius: 5,
                                     offset: Offset(0, 2))
                               ]),
-                          child: CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/images/z0mztjh7.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          child: provider['data']['profile_pic'] == null
+                              ? const CircleAvatar(
+                                  radius: 60,
+                                  backgroundColor: Colors.amber,
+                                )
+                              : CircleAvatar(
+                                  radius: 60,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: NetworkImage(
+                                      'http://54.80.135.220${provider['data']['profile_pic']}'),
+                                  // child: Image.asset(
+                                  //   'assets/images/z0mztjh7.png',
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                ),
                         ),
                         SizedBox(height: height * 0.005),
                         // Text(

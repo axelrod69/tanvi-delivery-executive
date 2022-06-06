@@ -350,8 +350,10 @@ class HomePageState extends State<HomePage> {
             ),
           ),
           Positioned(
-            left: width * 0.56,
-            top: height * 0.58,
+            //To Be Reinstated
+            // left: width * 0.56,
+            left: width * 0.39,
+            top: height * 0.57,
             // right: width * 0.6,
             child: Container(
               height:
@@ -398,54 +400,55 @@ class HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Positioned(
-            left: width * 0.2,
-            top: height * 0.58,
-            // right: width * 0.6,
-            child: Container(
-              height:
-                  !tabLayout && !largeLayout ? height * 0.16 : height * 0.15,
-              width: width * 0.25,
-              // color: Colors.amber,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: width * 0.02,
-                        top: height * 0.002,
-                        right: height * 0.01),
-                    child: InkWell(
-                      onTap: () =>
-                          Navigator.of(context).pushNamed('/profile-screen'),
-                      child: Container(
-                        width: double.infinity,
-                        height: height * 0.1,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.green, width: 2),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 10,
-                                  offset: Offset(1, 2))
-                            ]),
-                        child: Image.asset('assets/images/rating.png',
-                            scale: !tabLayout && !largeLayout ? 1.5 : 1.0),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: height * 0.005),
-                  Text(
-                    'Rating',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: !tabLayout && !largeLayout ? 12 : 14),
-                  )
-                ],
-              ),
-            ),
-          )
+          //To Be Reinstated
+          // Positioned(
+          //   left: width * 0.2,
+          //   top: height * 0.58,
+          //   // right: width * 0.6,
+          //   child: Container(
+          //     height:
+          //         !tabLayout && !largeLayout ? height * 0.16 : height * 0.15,
+          //     width: width * 0.25,
+          //     // color: Colors.amber,
+          //     child: Column(
+          //       children: [
+          //         Padding(
+          //           padding: EdgeInsets.only(
+          //               left: width * 0.02,
+          //               top: height * 0.002,
+          //               right: height * 0.01),
+          //           child: InkWell(
+          //             onTap: () =>
+          //                 Navigator.of(context).pushNamed('/profile-screen'),
+          //             child: Container(
+          //               width: double.infinity,
+          //               height: height * 0.1,
+          //               decoration: BoxDecoration(
+          //                   color: Colors.white,
+          //                   shape: BoxShape.circle,
+          //                   border: Border.all(color: Colors.green, width: 2),
+          //                   boxShadow: const [
+          //                     BoxShadow(
+          //                         color: Colors.grey,
+          //                         blurRadius: 10,
+          //                         offset: Offset(1, 2))
+          //                   ]),
+          //               child: Image.asset('assets/images/rating.png',
+          //                   scale: !tabLayout && !largeLayout ? 1.5 : 1.0),
+          //             ),
+          //           ),
+          //         ),
+          //         SizedBox(height: height * 0.005),
+          //         Text(
+          //           'Rating',
+          //           style: TextStyle(
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: !tabLayout && !largeLayout ? 12 : 14),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     ));

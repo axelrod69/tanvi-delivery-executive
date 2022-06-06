@@ -205,70 +205,70 @@ class OrderDetailsState extends State<OrderDetails> {
                     ),
                   ),
                   SizedBox(height: height * 0.05),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Center(
-                        child: Container(
-                          width: !tabLayout && !largeLayout
-                              ? width * 0.3
-                              : width * 0.4,
-                          height: !tabLayout && !largeLayout
-                              ? height * 0.07
-                              : height * 0.05,
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(30),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 5,
-                                    offset: Offset(1, 2))
-                              ]),
-                          child: Center(
-                            child: Text(
-                              'LOCATE SHOP',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize:
-                                      !tabLayout && !largeLayout ? 11 : 14),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                          width: !tabLayout && !largeLayout
-                              ? width * 0.3
-                              : width * 0.4,
-                          height: !tabLayout && !largeLayout
-                              ? height * 0.07
-                              : height * 0.05,
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(30),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 5,
-                                    offset: Offset(1, 2))
-                              ]),
-                          child: Center(
-                            child: Text(
-                              'LOCATE CUSTOMER',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize:
-                                      !tabLayout && !largeLayout ? 10 : 14),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.05),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: [
+                  //     Center(
+                  //       child: Container(
+                  //         width: !tabLayout && !largeLayout
+                  //             ? width * 0.3
+                  //             : width * 0.4,
+                  //         height: !tabLayout && !largeLayout
+                  //             ? height * 0.07
+                  //             : height * 0.05,
+                  //         decoration: BoxDecoration(
+                  //             color: Colors.green,
+                  //             borderRadius: BorderRadius.circular(30),
+                  //             boxShadow: const [
+                  //               BoxShadow(
+                  //                   color: Colors.grey,
+                  //                   blurRadius: 5,
+                  //                   offset: Offset(1, 2))
+                  //             ]),
+                  //         child: Center(
+                  //           child: Text(
+                  //             'LOCATE SHOP',
+                  //             style: TextStyle(
+                  //                 color: Colors.white,
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize:
+                  //                     !tabLayout && !largeLayout ? 11 : 14),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Center(
+                  //       child: Container(
+                  //         width: !tabLayout && !largeLayout
+                  //             ? width * 0.3
+                  //             : width * 0.4,
+                  //         height: !tabLayout && !largeLayout
+                  //             ? height * 0.07
+                  //             : height * 0.05,
+                  //         decoration: BoxDecoration(
+                  //             color: Colors.green,
+                  //             borderRadius: BorderRadius.circular(30),
+                  //             boxShadow: const [
+                  //               BoxShadow(
+                  //                   color: Colors.grey,
+                  //                   blurRadius: 5,
+                  //                   offset: Offset(1, 2))
+                  //             ]),
+                  //         child: Center(
+                  //           child: Text(
+                  //             'LOCATE CUSTOMER',
+                  //             style: TextStyle(
+                  //                 color: Colors.white,
+                  //                 fontWeight: FontWeight.bold,
+                  //                 fontSize:
+                  //                     !tabLayout && !largeLayout ? 10 : 14),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: height * 0.05),
                 ],
               ),
             ),
