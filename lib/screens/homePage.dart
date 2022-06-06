@@ -104,42 +104,42 @@ class HomePageState extends State<HomePage> {
                         fontSize: !tabLayout && !largeLayout ? 25 : 35),
                   ),
                 ),
-                Container(
-                  width: width * 0.7,
-                  height: !tabLayout && !largeLayout
-                      ? height * 0.07
-                      : height * 0.055,
-                  margin:
-                      EdgeInsets.only(top: height * 0.02, left: width * 0.02),
-                  padding: EdgeInsets.only(left: width * 0.02),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.greenAccent,
-                            // spreadRadius: 5,
-                            blurRadius: 5,
-                            offset: Offset(0, 2))
-                      ]),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        color: Colors.green,
-                        size: !tabLayout && !largeLayout ? 25 : 30,
-                      ),
-                      SizedBox(width: width * 0.04),
-                      Text(
-                        'Locate',
-                        // textScaleFactor: textScaleFactor,
-                        style: TextStyle(
-                            color: Colors.grey.withOpacity(0.6),
-                            fontSize: !tabLayout && !largeLayout ? 20 : 25),
-                      )
-                    ],
-                  ),
-                )
+                // Container(
+                //   width: width * 0.7,
+                //   height: !tabLayout && !largeLayout
+                //       ? height * 0.07
+                //       : height * 0.055,
+                //   margin:
+                //       EdgeInsets.only(top: height * 0.02, left: width * 0.02),
+                //   padding: EdgeInsets.only(left: width * 0.02),
+                //   decoration: BoxDecoration(
+                //       color: Colors.white,
+                //       borderRadius: BorderRadius.circular(20),
+                //       boxShadow: const [
+                //         BoxShadow(
+                //             color: Colors.greenAccent,
+                //             // spreadRadius: 5,
+                //             blurRadius: 5,
+                //             offset: Offset(0, 2))
+                //       ]),
+                //   child: Row(
+                //     children: [
+                //       Icon(
+                //         Icons.location_on,
+                //         color: Colors.green,
+                //         size: !tabLayout && !largeLayout ? 25 : 30,
+                //       ),
+                //       SizedBox(width: width * 0.04),
+                //       Text(
+                //         'Locate',
+                //         // textScaleFactor: textScaleFactor,
+                //         style: TextStyle(
+                //             color: Colors.grey.withOpacity(0.6),
+                //             fontSize: !tabLayout && !largeLayout ? 20 : 25),
+                //       )
+                //     ],
+                //   ),
+                // )
               ],
               // ),
               // Container(

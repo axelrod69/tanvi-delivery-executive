@@ -57,7 +57,7 @@ class OrderedProductsState extends State<OrderedProducts> {
                                 offset: Offset(0, 2))
                           ]),
                       child: Image.network(
-                          'http://192.168.0.154:3000${itemIndex['product']['main_image']}'
+                          'http://54.80.135.220${itemIndex['product']['main_image']}'
                           // _categoryItems[index]['image']
                           )),
                 SizedBox(height: height * 0.01),

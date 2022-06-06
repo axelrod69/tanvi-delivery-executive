@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderHistoryProvider with ChangeNotifier {
-  String baseUrl = 'http://192.168.0.154:3000/';
+  String baseUrl = 'http://54.80.135.220/';
   Map<String, dynamic> _orderHistory = {};
   Map<String, dynamic> _orderDetails = {};
   // List<dynamic> _orderList = [];
