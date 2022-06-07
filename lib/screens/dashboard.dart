@@ -148,8 +148,8 @@ class DashboardState extends State<Dashboard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                onTap: () => Navigator.of(context)
-                                    .pushNamed('/edit-details'),
+                                // onTap: () => Navigator.of(context)
+                                //     .pushNamed('/edit-details'),
                                 child: SizedBox(
                                   child: Row(
                                     children: [
