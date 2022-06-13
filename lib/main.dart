@@ -1,5 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import './screens/signIn.dart';
+import 'notificationService/localNotificationService.dart';
 import 'screens/editDetails.dart';
 import './screens/homePage.dart';
 import './widgets/bottomNavigation.dart';
@@ -19,8 +22,20 @@ import './model/location/locationProvider.dart';
 import './model/changeLocation/changeLocationProvider.dart';
 import './model/ordersHistory/orderHistory.dart';
 import './screens/deliveredOrders.dart';
+import './model/orderStatus/orderStatus.dart';
 
-void main() => runApp(TanviDeliveryApp());
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print(message.data.toString());
+  print(message.notification!.title);
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  LocalNotificationService.initialize();
+  runApp(TanviDeliveryApp());
+}
 
 class TanviDeliveryApp extends StatefulWidget {
   TanviDeliveryAppState createState() => TanviDeliveryAppState();
@@ -62,7 +77,8 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(create: (context) => LocationProvider()),
         ChangeNotifierProvider(create: (context) => ChangeLocationProvider()),
-        ChangeNotifierProvider(create: (context) => OrderHistoryProvider())
+        ChangeNotifierProvider(create: (context) => OrderHistoryProvider()),
+        ChangeNotifierProvider(create: (context) => OrderStatus())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

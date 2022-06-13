@@ -1,8 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/network/authentication.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class FormWidget extends StatefulWidget {
   FormWidgetState createState() => FormWidgetState();
@@ -16,6 +18,19 @@ class FormWidgetState extends State<FormWidget> {
   final _focusFourth = FocusNode();
   String? email;
   String? password;
+  String? fcm;
+
+  Future<void> fcmCodeGenerate() async {
+    fcm = await FirebaseMessaging.instance.getToken();
+    print('FCM Code $fcm');
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fcmCodeGenerate();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -175,6 +190,19 @@ class FormWidgetState extends State<FormWidget> {
 
     await localStorage.setString('token', res['data']['access']);
     await localStorage.setString('refresh', res['data']['refresh']);
+    final url = Uri.parse('http://54.80.135.220/' + 'api/fcm-token/');
+
+    // var responseFcm =
+    //     await Provider.of<Network>(context, listen: false).fcmToken(fcm);
+
+    var responseFcm =
+        await http.post(url, body: json.encode({'fcm_token': fcm}), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${localStorage.getString('token')}'
+    });
+
+    print(responseFcm.body);
+
     Navigator.of(context).pushNamed('/home-screen');
   }
 }

@@ -37,6 +37,9 @@ dependencies:
   geocoding: ^2.0.4
   geolocator: ^8.2.0
   flutter_phone_direct_caller: ^2.1.1
+  firebase_core: ^1.17.1
+  firebase_messaging: ^11.4.1
+  flutter_local_notifications: ^9.6.0
 
 
   # The following adds the Cupertino Icons font to your application.

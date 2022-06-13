@@ -38,9 +38,7 @@ class OrderHistoryProvider with ChangeNotifier {
 
       print('$filter Orders: $_orderHistory');
     } else {
-      _orderHistory = {
-        'data': {'cartItem': []}
-      };
+      _orderHistory = {'data': []};
       return;
     }
   }

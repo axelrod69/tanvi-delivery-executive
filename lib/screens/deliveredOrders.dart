@@ -70,7 +70,7 @@ class DeliveredOrdersState extends State<DeliveredOrders> {
                 color: Colors.green,
               ),
             )
-          : provider['data']['cartItem'].length == 0
+          : provider['data'].length == 0
               ? const Center(
                   child: Text('No Orders Delivered Yet'),
                 )

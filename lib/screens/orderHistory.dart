@@ -57,7 +57,7 @@ class OrderHistoryState extends State<OrderHistory> {
           ),
         ),
         title: Text(
-          'Cancelled Orders',
+          'Order History',
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,

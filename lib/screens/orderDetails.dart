@@ -3,6 +3,7 @@ import '../widgets/orderDetails/orderedProducts.dart';
 import '../widgets/orderDetails/address.dart';
 import 'package:provider/provider.dart';
 import '../model/ordersHistory/orderHistory.dart';
+import '../model/orderStatus/orderStatus.dart';
 
 class OrderDetails extends StatefulWidget {
   final String id;
@@ -14,6 +15,10 @@ class OrderDetails extends StatefulWidget {
 class OrderDetailsState extends State<OrderDetails> {
   bool isLoading = true;
   int count = 0;
+  List<String> status = [
+    'On The Way',
+    'Delivered',
+  ];
 
   @override
   void initState() {
@@ -188,7 +193,7 @@ class OrderDetailsState extends State<OrderDetails> {
                                             : 25),
                                   ),
                                   Text(
-                                    '(${provider['data']['orderDetails']['payment_status']})',
+                                    '(${provider['payment_status']})',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.grey,
@@ -205,6 +210,97 @@ class OrderDetailsState extends State<OrderDetails> {
                     ),
                   ),
                   SizedBox(height: height * 0.05),
+                  Container(
+                    width: double.infinity,
+                    // color: Colors.red,
+                    padding: EdgeInsets.only(
+                        left: width * 0.02, right: width * 0.02),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Text('Change Status',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ],
+                        ),
+                        SizedBox(height: height * 0.01),
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: InkWell(
+                                onTap: () => onTheWay(
+                                    provider['data']['orderDetails']['id'],
+                                    'On The Way'),
+                                child: Container(
+                                  height: height * 0.05,
+                                  decoration: BoxDecoration(
+                                      color: Colors.amber,
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 8,
+                                            offset: Offset(1, 2))
+                                      ]),
+                                  child: const Center(
+                                    child: Text('On The Way',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: width * 0.02),
+                            Flexible(
+                              flex: 1,
+                              child: InkWell(
+                                onTap: () => delivered(
+                                    provider['data']['orderDetails']['id'],
+                                    'On The Way'),
+                                child: Container(
+                                  height: height * 0.05,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 8,
+                                            offset: Offset(1, 2))
+                                      ]),
+                                  child: const Center(
+                                    child: Text('Delivered',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text('Change Status'),
+                  //     DropdownButtonHideUnderline(
+                  //       child:
+                  //           DropdownButton(items: items, onChanged: onChanged),
+                  //     )
+                  //   ],
+                  // )
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   //   children: [
@@ -273,5 +369,47 @@ class OrderDetailsState extends State<OrderDetails> {
               ),
             ),
     );
+  }
+
+  void onTheWay(int id, String s) async {
+    var response = await Provider.of<OrderStatus>(context, listen: false)
+        .postUpdate(id.toString(), s);
+
+    if (response['status'] == 'success') {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.green,
+        content: const Text('Status Updated to On The Way',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )),
+        action: SnackBarAction(
+            label: 'OK',
+            textColor: Colors.white,
+            onPressed: () =>
+                ScaffoldMessenger.of(context).hideCurrentSnackBar()),
+      ));
+    }
+  }
+
+  void delivered(int id, String s) async {
+    var response = await Provider.of<OrderStatus>(context, listen: false)
+        .postUpdate(id.toString(), s);
+
+    if (response['status'] == 'success') {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.green,
+        content: const Text('Status Updated to Delivered',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )),
+        action: SnackBarAction(
+            label: 'OK',
+            textColor: Colors.white,
+            onPressed: () =>
+                ScaffoldMessenger.of(context).hideCurrentSnackBar()),
+      ));
+    }
   }
 }

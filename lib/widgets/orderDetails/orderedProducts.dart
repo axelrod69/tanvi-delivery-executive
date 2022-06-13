@@ -32,7 +32,7 @@ class OrderedProductsState extends State<OrderedProducts> {
               top: height * 0.01,
               // right: height * 0.02
             ),
-            // color: Colors.amber,
+            color: Colors.amber,
             margin: EdgeInsets.only(right: width * 0.02),
             child: Column(
               children: [

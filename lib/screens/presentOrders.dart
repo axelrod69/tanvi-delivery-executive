@@ -72,7 +72,7 @@ class PresentOrdersState extends State<PresentOrders> {
               ),
             )
           : provider['data'].length == 0
-              ? Center(
+              ? const Center(
                   child: Text('No Orders Received'),
                 )
               : Container(
