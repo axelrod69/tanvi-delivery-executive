@@ -17,6 +17,11 @@ class HomePageState extends State<HomePage> {
   bool isPressed = false;
   String? status;
 
+  Future<void> getStatus() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    status = localStorage.getString('loginStatus');
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -28,6 +33,11 @@ class HomePageState extends State<HomePage> {
         isLoading = false;
       });
     });
+
+    getStatus();
+
+    status == 'active' ? isPressed = true : isPressed = false;
+
     super.initState();
 
     // 1. This method call when app in terminated state and you get a notification
@@ -110,6 +120,7 @@ class HomePageState extends State<HomePage> {
   @override
   void dispose() {
     // TODO: implement dispose
+    // apiCall(status!).cancel();
     super.dispose();
   }
 
@@ -206,10 +217,16 @@ class HomePageState extends State<HomePage> {
                 setState(() {
                   isPressed = !isPressed;
                   status = isPressed == true ? 'active' : 'inactive';
+                  localStorage.setString('loginStatus', status!);
                   print(isPressed);
                   print(status);
                 });
                 apiCall(status!);
+                // if (status == true) {
+                //   apiCall(status!);
+                // } else {
+                //   return;
+                // }
               },
               child: Container(
                 width: width * 0.05,
@@ -236,8 +253,8 @@ class HomePageState extends State<HomePage> {
                     ),
                     child: Center(
                       child: Text(
-                        isPressed == true ? 'Active' : 'Inactive',
-                        style: TextStyle(
+                        status == 'active' ? 'Active' : 'Inactive',
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
