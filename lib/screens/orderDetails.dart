@@ -14,7 +14,6 @@ class OrderDetails extends StatefulWidget {
 
 class OrderDetailsState extends State<OrderDetails> {
   bool isLoading = true;
-  int count = 0;
   List<String> status = [
     'On The Way',
     'Delivered',
@@ -36,6 +35,7 @@ class OrderDetailsState extends State<OrderDetails> {
   String get itemCount {
     var itemLength =
         Provider.of<OrderHistoryProvider>(context, listen: false).orderDetails;
+    int count = 0;
     for (final itemCount in itemLength['data']['vendorList']) {
       count += itemCount['total_items'] as int;
     }
