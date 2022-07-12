@@ -25,7 +25,7 @@
   </intent>
 </queries>
    <application
-        android:label="Tanvee Store Executive"
+        android:label="Tanvee Executive"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
