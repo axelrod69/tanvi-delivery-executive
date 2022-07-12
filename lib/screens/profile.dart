@@ -213,7 +213,7 @@ class ProfileState extends State<Profile> {
                                   radius: 60,
                                   backgroundColor: Colors.white,
                                   backgroundImage: NetworkImage(
-                                      'http://54.80.135.220${provider['data']['profile_pic']}'),
+                                      'http://34.100.212.22${provider['data']['profile_pic']}'),
                                   // child: Image.asset(
                                   //   'assets/images/z0mztjh7.png',
                                   //   fit: BoxFit.cover,

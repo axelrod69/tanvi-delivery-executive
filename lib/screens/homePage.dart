@@ -16,6 +16,7 @@ class HomePageState extends State<HomePage> {
   bool isLoading = true;
   bool isPressed = false;
   String? status;
+  late Timer _timer;
 
   Future<void> getStatus() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -91,7 +92,7 @@ class HomePageState extends State<HomePage> {
     print('Is Pressed: $isPressed');
     print('execStatus: $execStatus');
     Random number = Random();
-    Timer.periodic(const Duration(seconds: 5), (Timer t) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       if (isPressed == true) {
         double latitude = Provider.of<LocationProvider>(context, listen: false)
             .coorDinates['lat'];
@@ -120,7 +121,7 @@ class HomePageState extends State<HomePage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    // apiCall(status!).cancel();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -222,11 +223,11 @@ class HomePageState extends State<HomePage> {
                   print(status);
                 });
                 apiCall(status!);
-                // if (status == true) {
-                //   apiCall(status!);
-                // } else {
-                //   return;
-                // }
+                if (status == true) {
+                  apiCall(status!);
+                } else {
+                  return;
+                }
               },
               child: Container(
                 width: width * 0.05,

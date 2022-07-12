@@ -51,8 +51,8 @@ class OrderedProductsState extends State<OrderedProducts> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            // 'http://54.80.135.220${widget.productList[itemIndex]['vendor_products'][0]['main_image']}'
-                            'http://54.80.135.220${itemIndex['product']['main_image']}',
+                            // 'http://34.100.212.22${widget.productList[itemIndex]['vendor_products'][0]['main_image']}'
+                            'http://34.100.212.22${itemIndex['product']['main_image']}',
                             // _categoryItems[index]['image']
                             fit: BoxFit.contain,
                           ),
@@ -107,7 +107,7 @@ class OrderedProductsState extends State<OrderedProducts> {
         //                         offset: Offset(0, 2))
         //                   ]),
         //               child: Image.network(
-        //                   'http://54.80.135.220${itemIndex['product']['main_image']}'
+        //                   'http://34.100.212.22${itemIndex['product']['main_image']}'
         //                   // _categoryItems[index]['image']
         //                   )),
         //         SizedBox(height: height * 0.01),

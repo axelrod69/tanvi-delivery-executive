@@ -216,11 +216,11 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
                                           : CircleAvatar(
                                               radius: 15,
                                               backgroundImage: NetworkImage(
-                                                  'http://54.80.135.220${profileProvider['data']['profile_pic']}'),
+                                                  'http://34.100.212.22${profileProvider['data']['profile_pic']}'),
                                               // child: ClipRRect(
                                               //     borderRadius: BorderRadius.circular(20),
                                               //     child: Image.network(
-                                              //       'http://54.80.135.220${profileProvider['data']['profile_pic']}',
+                                              //       'http://34.100.212.22${profileProvider['data']['profile_pic']}',
                                               //       fit: BoxFit.contain,
                                               //     )),
                                             ))

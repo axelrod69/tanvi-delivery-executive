@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "692635467928",
-    "project_id": "tanvee-executive-android",
-    "storage_bucket": "tanvee-executive-android.appspot.com"
+    "project_number": "937669159808",
+    "project_id": "tanvee-store-executive",
+    "storage_bucket": "tanvee-store-executive.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:692635467928:android:3da72ecdbf82fb7e0210ed",
+        "mobilesdk_app_id": "1:937669159808:android:8e25f5755a3e041711af65",
         "android_client_info": {
           "package_name": "com.example.tanvi_delivery"
         }
       },
       "oauth_client": [
         {
-          "client_id": "692635467928-4nf6g1u26cg43e7r6pgefrgtumhc944u.apps.googleusercontent.com",
+          "client_id": "937669159808-3msk6shesoiu7lmljg1rto2r9ofbpv16.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAs_QyXovgSJKrVyRLngRynfgdbamomKpg"
+          "current_key": "AIzaSyBcjx1de3s05ZGehOhqZXZyY756AkPft8E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "692635467928-4nf6g1u26cg43e7r6pgefrgtumhc944u.apps.googleusercontent.com",
+              "client_id": "937669159808-3msk6shesoiu7lmljg1rto2r9ofbpv16.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

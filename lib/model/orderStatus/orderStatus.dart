@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class OrderStatus with ChangeNotifier {
-  String baseUrl = 'http://54.80.135.220/';
+  String baseUrl = 'http://34.100.212.22/';
 
   Future<Map<String, dynamic>> postUpdate(String id, String status) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
