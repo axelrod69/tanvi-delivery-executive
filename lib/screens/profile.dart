@@ -37,6 +37,7 @@ class ProfileState extends State<Profile> {
               margin: EdgeInsets.only(top: height * 0.03),
               padding: EdgeInsets.only(left: width * 0.01),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // InkWell(
                   //   onTap: () => Navigator.of(context).pop(),
@@ -61,19 +62,13 @@ class ProfileState extends State<Profile> {
                   //         const Icon(Icons.arrow_back_ios, color: Colors.green),
                   //   ),
                   // ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: !tabLayout && !largeLayout
-                            ? width * 0.22
-                            : width * 0.3),
-                    child: const Text(
-                      'Profile',
-                      // textScaleFactor: textScaleFactor,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25),
-                    ),
+                  const Text(
+                    'Profile',
+                    // textScaleFactor: textScaleFactor,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25),
                   )
                 ],
               ),
@@ -187,50 +182,50 @@ class ProfileState extends State<Profile> {
                       ),
                     ],
                   ),
-                  Positioned(
-                    top: !tabLayout && !largeLayout
-                        ? height * 0.005
-                        : height * 0.04,
-                    left: 0,
-                    right: 0,
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2))
-                              ]),
-                          child: provider['data']['profile_pic'] == null
-                              ? const CircleAvatar(
-                                  radius: 60,
-                                  backgroundColor: Colors.amber,
-                                )
-                              : CircleAvatar(
-                                  radius: 60,
-                                  backgroundColor: Colors.white,
-                                  backgroundImage: NetworkImage(
-                                      'http://34.100.212.22${provider['data']['profile_pic']}'),
-                                  // child: Image.asset(
-                                  //   'assets/images/z0mztjh7.png',
-                                  //   fit: BoxFit.cover,
-                                  // ),
-                                ),
-                        ),
-                        SizedBox(height: height * 0.005),
-                        // Text(
-                        //   'Edit',
-                        //   textScaleFactor: textScaleFactor,
-                        //   style: TextStyle(
-                        //       color: Colors.grey[600],
-                        //       fontWeight: FontWeight.bold),
-                        // )
-                      ],
-                    ),
-                  )
+                  // Positioned(
+                  //   top: !tabLayout && !largeLayout
+                  //       ? height * 0.005
+                  //       : height * 0.04,
+                  //   left: 0,
+                  //   right: 0,
+                  //   child: Column(
+                  //     children: [
+                  //       Container(
+                  //         decoration: const BoxDecoration(
+                  //             shape: BoxShape.circle,
+                  //             boxShadow: [
+                  //               BoxShadow(
+                  //                   color: Colors.grey,
+                  //                   blurRadius: 5,
+                  //                   offset: Offset(0, 2))
+                  //             ]),
+                  //         child: provider['data']['profile_pic'] == null
+                  //             ? const CircleAvatar(
+                  //                 radius: 60,
+                  //                 backgroundColor: Colors.amber,
+                  //               )
+                  //             : CircleAvatar(
+                  //                 radius: 60,
+                  //                 backgroundColor: Colors.white,
+                  //                 backgroundImage: NetworkImage(
+                  //                     'http://34.100.212.22${provider['data']['profile_pic']}'),
+                  //                 // child: Image.asset(
+                  //                 //   'assets/images/z0mztjh7.png',
+                  //                 //   fit: BoxFit.cover,
+                  //                 // ),
+                  //               ),
+                  //       ),
+                  //       SizedBox(height: height * 0.005),
+                  //       // Text(
+                  //       //   'Edit',
+                  //       //   textScaleFactor: textScaleFactor,
+                  //       //   style: TextStyle(
+                  //       //       color: Colors.grey[600],
+                  //       //       fontWeight: FontWeight.bold),
+                  //       // )
+                  //     ],
+                  //   ),
+                  // )
                 ],
               ),
             ),

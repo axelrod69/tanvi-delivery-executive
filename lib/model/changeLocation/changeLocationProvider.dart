@@ -29,6 +29,8 @@ class ChangeLocationProvider with ChangeNotifier {
 
     var res = json.decode(response.body);
 
+    print('Response Location: $res');
+
     return res;
   }
 

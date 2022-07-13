@@ -21,6 +21,10 @@ class HomePageState extends State<HomePage> {
   Future<void> getStatus() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     status = localStorage.getString('loginStatus');
+    status == 'active' ? isPressed = true : isPressed = false;
+    print('Status: $status');
+    print('isPresseddddddddd: $isPressed');
+    status == 'active' && isPressed == true ? locationUpdate(status!) : null;
   }
 
   @override
@@ -37,7 +41,7 @@ class HomePageState extends State<HomePage> {
 
     getStatus();
 
-    status == 'active' ? isPressed = true : isPressed = false;
+    // print('Initial Status: $isPressed');
 
     super.initState();
 
@@ -88,10 +92,37 @@ class HomePageState extends State<HomePage> {
     );
   }
 
+  locationUpdate(String status) async {
+    print('Location Update');
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      if (isPressed == true) {
+        double latitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lat'];
+        // double latitude = number.nextDouble();
+        double longitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lng'];
+        // double longitude = number.nextDouble();
+        print('Latitude LAt: $latitude');
+        print('Longitude Long: $longitude');
+        print('Status Inside: $status');
+        Provider.of<ChangeLocationProvider>(context, listen: false)
+            .postLocation(latitude, longitude, status);
+      } else {
+        double latitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lat'];
+        // double latitude = number.nextDouble();
+        double longitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lng'];
+        Provider.of<ChangeLocationProvider>(context, listen: false)
+            .postLocation(latitude, longitude, status);
+        t.cancel();
+      }
+    });
+  }
+
   apiCall(String execStatus) async {
     print('Is Pressed: $isPressed');
     print('execStatus: $execStatus');
-    Random number = Random();
     _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
       if (isPressed == true) {
         double latitude = Provider.of<LocationProvider>(context, listen: false)
@@ -219,14 +250,16 @@ class HomePageState extends State<HomePage> {
                   isPressed = !isPressed;
                   status = isPressed == true ? 'active' : 'inactive';
                   localStorage.setString('loginStatus', status!);
+                  print(
+                      'Login Status: ${localStorage.getString('loginStatus')}');
                   print(isPressed);
-                  print(status);
+                  print('Executive Status: $status');
                 });
-                apiCall(status!);
-                if (status == true) {
+                // apiCall(status!);
+                if (status == 'active') {
                   apiCall(status!);
                 } else {
-                  return;
+                  apiCall('inactive');
                 }
               },
               child: Container(
@@ -268,7 +301,7 @@ class HomePageState extends State<HomePage> {
           ),
           Positioned(
             left: width * 0.25,
-            top: height * 0.25,
+            top: height * 0.24,
             right: width * 0.25,
             child: Padding(
               padding: EdgeInsets.only(left: width * 0.12, right: width * 0.12),
@@ -418,8 +451,8 @@ class HomePageState extends State<HomePage> {
           Positioned(
             //To Be Reinstated
             // left: width * 0.56,
-            left: width * 0.39,
-            top: height * 0.57,
+            left: width * 0.38,
+            top: height * 0.58,
             // right: width * 0.6,
             child: Container(
               height:
