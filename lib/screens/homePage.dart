@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tanvi_delivery/model/network/authentication.dart';
+import 'package:tanvi_delivery/screens/signIn.dart';
 import '../model/location/locationProvider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/changeLocation/changeLocationProvider.dart';
@@ -136,6 +138,7 @@ class HomePageState extends State<HomePage> {
         print('Status Inside: $status');
         Provider.of<ChangeLocationProvider>(context, listen: false)
             .postLocation(latitude, longitude, execStatus);
+        // t.cancel();
       } else {
         double latitude = Provider.of<LocationProvider>(context, listen: false)
             .coorDinates['lat'];
@@ -188,11 +191,63 @@ class HomePageState extends State<HomePage> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.05),
-                  child: Text(
-                    'Get Set Go',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: !tabLayout && !largeLayout ? 25 : 35),
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        flex: 3,
+                        fit: FlexFit.tight,
+                        child: Container(
+                          // color: Colors.red,
+                          padding: EdgeInsets.only(right: width * 0.02),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                'Get Set Go',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        !tabLayout && !largeLayout ? 25 : 35),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                          flex: 1,
+                          fit: FlexFit.tight,
+                          child: Container(
+                              // color: Colors.amber,
+                              padding: EdgeInsets.only(right: width * 0.02),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                      onTap: () async {
+                                        SharedPreferences localStorage =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        var data = {
+                                          'refresh':
+                                              localStorage.getString('refresh')
+                                        };
+                                        Provider.of<Network>(context,
+                                                listen: false)
+                                            .logOut(data, 'api/log-out/')
+                                            .then((_) {
+                                          setState(() {
+                                            localStorage.remove('token');
+                                          });
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (_) => SignIn()));
+                                        });
+                                      },
+                                      child: Icon(Icons.logout)),
+                                ],
+                              )))
+                    ],
                   ),
                 ),
                 // Container(

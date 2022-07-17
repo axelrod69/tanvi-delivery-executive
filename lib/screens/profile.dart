@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../model/changeLocation/changeLocationProvider.dart';
+import '../model/location/locationProvider.dart';
 import '../model/profile/profileProvider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:tanvi/widgets/bottomNavigation.dart';
 
 class Profile extends StatefulWidget {
@@ -8,6 +13,56 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> {
+  String? status;
+  Timer? timer;
+
+  Future<void> getStatus() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    status = localStorage.getString('loginStatus');
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    getStatus();
+
+    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      if (status == 'active') {
+        double latitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lat'];
+        // double latitude = number.nextDouble();
+        double longitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lng'];
+        // double longitude = number.nextDouble();
+        print('Latitude LAt: $latitude');
+        print('Longitude Long: $longitude');
+        print('Status Inside: $status');
+        Provider.of<ChangeLocationProvider>(context, listen: false)
+            .postLocation(latitude, longitude, 'active');
+        // t.cancel();
+      } else {
+        double latitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lat'];
+        // double latitude = number.nextDouble();
+        double longitude = Provider.of<LocationProvider>(context, listen: false)
+            .coorDinates['lng'];
+        Provider.of<ChangeLocationProvider>(context, listen: false)
+            .postLocation(latitude, longitude, 'inactive');
+        t.cancel();
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

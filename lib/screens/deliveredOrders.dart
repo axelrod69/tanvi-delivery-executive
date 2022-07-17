@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../model/changeLocation/changeLocationProvider.dart';
+import '../model/location/locationProvider.dart';
 import '../model/ordersHistory/orderHistory.dart';
 
 class DeliveredOrders extends StatefulWidget {
@@ -8,18 +13,64 @@ class DeliveredOrders extends StatefulWidget {
 
 class DeliveredOrdersState extends State<DeliveredOrders> {
   bool isLoading = true;
+  String? status;
+  Timer? timer;
+
+  Future<void> getStatus() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    status = localStorage.getString('loginStatus');
+  }
 
   @override
   void initState() {
     // TODO: implement initState
+
+    getStatus();
+
     Provider.of<OrderHistoryProvider>(context, listen: false)
         .getOrderHistory('delivered')
         .then((_) {
       setState(() {
         isLoading = false;
+        timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+          if (status == 'active') {
+            double latitude =
+                Provider.of<LocationProvider>(context, listen: false)
+                    .coorDinates['lat'];
+            // double latitude = number.nextDouble();
+            double longitude =
+                Provider.of<LocationProvider>(context, listen: false)
+                    .coorDinates['lng'];
+            // double longitude = number.nextDouble();
+            print('Latitude LAt: $latitude');
+            print('Longitude Long: $longitude');
+            print('Status Inside: $status');
+            Provider.of<ChangeLocationProvider>(context, listen: false)
+                .postLocation(latitude, longitude, 'active');
+            // t.cancel();
+          } else {
+            double latitude =
+                Provider.of<LocationProvider>(context, listen: false)
+                    .coorDinates['lat'];
+            // double latitude = number.nextDouble();
+            double longitude =
+                Provider.of<LocationProvider>(context, listen: false)
+                    .coorDinates['lng'];
+            Provider.of<ChangeLocationProvider>(context, listen: false)
+                .postLocation(latitude, longitude, 'inactive');
+            t.cancel();
+          }
+        });
       });
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer!.cancel();
+    super.dispose();
   }
 
   @override
