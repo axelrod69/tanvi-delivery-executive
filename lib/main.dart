@@ -23,6 +23,7 @@ import './model/changeLocation/changeLocationProvider.dart';
 import './model/ordersHistory/orderHistory.dart';
 import './screens/deliveredOrders.dart';
 import './model/orderStatus/orderStatus.dart';
+import './model/notificationList/notificationList.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   print(message.data.toString());
@@ -78,7 +79,8 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
         ChangeNotifierProvider(create: (context) => LocationProvider()),
         ChangeNotifierProvider(create: (context) => ChangeLocationProvider()),
         ChangeNotifierProvider(create: (context) => OrderHistoryProvider()),
-        ChangeNotifierProvider(create: (context) => OrderStatus())
+        ChangeNotifierProvider(create: (context) => OrderStatus()),
+        ChangeNotifierProvider(create: ((context) => NotificationList()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

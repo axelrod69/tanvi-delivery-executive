@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:tanvi/widgets/bottomNavigation.dart';
+import 'package:provider/provider.dart';
+import '../model/notificationList/notificationList.dart';
 
 class Notifications extends StatefulWidget {
   NotificationsState createState() => NotificationsState();
@@ -26,10 +27,13 @@ class NotificationsState extends State<Notifications> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final textScaleFactor = MediaQuery.of(context).textScaleFactor * 1.2;
+    final notifications =
+        Provider.of<NotificationList>(context).notificationList;
 
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         centerTitle: true,
@@ -75,18 +79,30 @@ class NotificationsState extends State<Notifications> {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(right: width * 0.011),
-                    child: Text(
-                      _notifications[index],
-                      textScaleFactor: textScaleFactor,
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                    child: Column(
+                      children: [
+                        Text(
+                          notifications['data'][index]['notificationText'],
+                          textScaleFactor: textScaleFactor,
+                          style: const TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          notifications['data'][index]['created_at'],
+                          textScaleFactor: textScaleFactor,
+                          style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 )
               ],
             ),
           ),
-          itemCount: _notifications.length,
+          itemCount: notifications['data'].length,
         ),
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

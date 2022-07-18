@@ -9,6 +9,7 @@ import '../model/profile/profileProvider.dart';
 import '../screens/presentOrders.dart';
 import '../model/ordersHistory/orderHistory.dart';
 import '../screens/deliveredOrders.dart';
+import '../model/notificationList/notificationList.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
   CustomBottomNavigationState createState() => CustomBottomNavigationState();
@@ -22,8 +23,12 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
   void initState() {
     // TODO: implement initState
     Provider.of<ProfileProvider>(context, listen: false).getProfile().then((_) {
-      setState(() {
-        isLoading = false;
+      Provider.of<NotificationList>(context, listen: false)
+          .getNotificationList()
+          .then((_) {
+        setState(() {
+          isLoading = false;
+        });
       });
     });
     super.initState();
@@ -49,8 +54,8 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
 
   final screens = [
     HomePage(),
-    Dashboard(),
-    // Notifications(),
+    // Dashboard(),
+    Notifications(),
     Profile(),
     PresentOrders(),
     DeliveredOrders()
@@ -150,7 +155,7 @@ class CustomBottomNavigationState extends State<CustomBottomNavigation> {
                                     //   // });
                                     // },
                                     child: Image.asset(
-                                        'assets/images/Icon ionic-ios-settings.png'),
+                                        'assets/images/Icon awesome-bell.png'),
                                   )
                                 ],
                               ),

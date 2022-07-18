@@ -1,4 +1,4 @@
-package com.example.tanvi_delivery
+package com.tanvee.tanvi_delivery
 
 import io.flutter.embedding.android.FlutterActivity
 
