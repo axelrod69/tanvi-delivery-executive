@@ -239,9 +239,12 @@ class HomePageState extends State<HomePage> {
                                           setState(() {
                                             localStorage.remove('token');
                                           });
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (_) => SignIn()));
+                                          // Navigator.of(context).push(
+                                          //     MaterialPageRoute(
+                                          //         builder: (_) => SignIn()));
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                                  '/sign_in', (route) => false);
                                         });
                                       },
                                       child: Icon(Icons.logout)),

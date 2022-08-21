@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/ordersHistory/orderHistory.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class CancelledOrders extends StatefulWidget {
   CancelledOrdersState createState() => CancelledOrdersState();
@@ -8,6 +9,7 @@ class CancelledOrders extends StatefulWidget {
 
 class CancelledOrdersState extends State<CancelledOrders> {
   bool isLoading = true;
+  DateFormat dateFormat = DateFormat('dd-MMM-yyyy HH:mm:ss');
 
   @override
   void initState() {

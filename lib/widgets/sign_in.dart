@@ -183,6 +183,8 @@ class FormWidgetState extends State<FormWidget> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var data = {'email': email, 'password': password};
 
+    localStorage.setString('registeredEmail', data['email'].toString());
+
     var response = await Provider.of<Network>(context, listen: false)
         .logIn(data, 'api/delivery-executive/login/');
 

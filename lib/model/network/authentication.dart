@@ -35,6 +35,18 @@ class Network with ChangeNotifier {
         body: json.encode(data), headers: {'Content-Type': 'application/json'});
   }
 
+  dynamic forgotPassword(data, url) async {
+    final fullUrl = Uri.parse(baseUrl + url);
+    return await http.post(fullUrl,
+        body: json.encode(data), headers: {'Content-Type': 'application/json'});
+  }
+
+  dynamic resetPassword(data, url) async {
+    final fullUrl = Uri.parse(baseUrl + url);
+    return await http.post(fullUrl,
+        body: json.encode(data), headers: {'Content-Type': 'application/json'});
+  }
+
   dynamic logOut(data, url) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     final fullUrl = baseUrl + url;

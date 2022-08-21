@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/changeLocation/changeLocationProvider.dart';
@@ -7,6 +6,7 @@ import '../model/location/locationProvider.dart';
 import '../model/ordersHistory/orderHistory.dart';
 import 'package:provider/provider.dart';
 import '../screens/orderDetails.dart';
+import 'package:intl/intl.dart';
 
 class PresentOrders extends StatefulWidget {
   PresentOrdersState createState() => PresentOrdersState();
@@ -16,6 +16,7 @@ class PresentOrdersState extends State<PresentOrders> {
   bool isLoading = true;
   String? status;
   Timer? timer;
+  DateFormat dateFormat = DateFormat('dd-MMM-yyyy HH:mm:ss');
 
   Future<void> getStatus() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -242,8 +243,7 @@ class PresentOrdersState extends State<PresentOrders> {
                                               ),
                                               SizedBox(height: height * 0.01),
                                               Text(
-                                                provider['data'][index]
-                                                    ['created_at'],
+                                                '${dateFormat.format(DateTime.parse(provider['data'][index]['created_at']).toLocal())}',
                                                 // textScaleFactor: textScaleFactor,
                                                 style: TextStyle(
                                                     color: Colors.black,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/ordersHistory/orderHistory.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class OrderHistory extends StatefulWidget {
   OrderHistoryState createState() => OrderHistoryState();
@@ -8,6 +9,7 @@ class OrderHistory extends StatefulWidget {
 
 class OrderHistoryState extends State<OrderHistory> {
   bool isLoading = true;
+  DateFormat dateFormat = DateFormat('dd-MMM-yyyy HH:mm:ss');
 
   @override
   void initState() {
@@ -183,8 +185,7 @@ class OrderHistoryState extends State<OrderHistory> {
                                           ),
                                           SizedBox(height: height * 0.01),
                                           Text(
-                                            provider['data'][index]
-                                                ['created_at'],
+                                            '${dateFormat.format(DateTime.parse(provider['data'][index]['created_at']).toLocal())}',
                                             // textScaleFactor: textScaleFactor,
                                             style: TextStyle(
                                                 color: Colors.black,

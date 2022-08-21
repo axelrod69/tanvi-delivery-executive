@@ -24,6 +24,7 @@ import './model/ordersHistory/orderHistory.dart';
 import './screens/deliveredOrders.dart';
 import './model/orderStatus/orderStatus.dart';
 import './model/notificationList/notificationList.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   print(message.data.toString());
@@ -57,12 +58,13 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     // SharedPreferences refresh = await SharedPreferences.getInstance();
     var token = localStorage.getString('token');
+    bool isExpired = JwtDecoder.isExpired(token!);
     // localStorage.remove('token');
     // localStorage.remove('refresh');
     print('Access Tokeeeeeeeeeeeeeeeen : ${localStorage.getString('token')}');
     print(
         'Refressssssssssh Tokeeeeeeeeeen : ${localStorage.getString('refresh')}');
-    if (token != null) {
+    if (token != null && isExpired == false) {
       setState(() {
         isAuth = true;
       });
@@ -90,6 +92,7 @@ class TanviDeliveryAppState extends State<TanviDeliveryApp> {
         // home: SignIn(),
         // home: OrderDetails(),
         routes: {
+          '/sign_in': (context) => SignIn(),
           '/home-screen': (context) => CustomBottomNavigation(),
           '/cancelled-orders': (context) => CancelledOrders(),
           // '/order-details': (context) => OrderDetails(),
