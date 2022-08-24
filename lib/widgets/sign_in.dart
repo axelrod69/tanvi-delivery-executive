@@ -111,6 +111,7 @@ class FormWidgetState extends State<FormWidget> {
                         offset: Offset(1, 2))
                   ]),
               child: TextFormField(
+                obscureText: true,
                 // keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                     hintText: 'Enter Your Password',
